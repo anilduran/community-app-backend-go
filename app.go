@@ -1,6 +1,7 @@
 package main
 
 import (
+	"example.com/community-app-backend/db"
 	"example.com/community-app-backend/routes"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
@@ -12,6 +13,12 @@ func main() {
 
 	if err != nil {
 		panic("failed to load .env file")
+	}
+
+	err = db.InitializeDB()
+
+	if err != nil {
+		panic("failed to connect database")
 	}
 
 	r := gin.Default()

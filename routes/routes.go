@@ -7,6 +7,10 @@ import (
 
 func RegisterRoutes(r *gin.Engine) {
 
+	auth := r.Group("/api/auth")
+	auth.POST("/sign-in", SignIn)
+	auth.POST("/sign-up", SignUp)
+
 	category := r.Group("/api/categories")
 	category.Use(middlewares.Auth)
 	category.GET("/", GetCategories)
@@ -35,6 +39,9 @@ func RegisterRoutes(r *gin.Engine) {
 	me.Use(middlewares.Auth)
 	me.GET("/", GetMyCredentials)
 	me.PUT("/", UpdateMyCredentials)
+	me.GET("/posts", GetMyPosts)
+	me.GET("/comments", GetMyComments)
+	me.GET("/communities", GetMyCommunities)
 
 	post := r.Group("/api/posts")
 	post.Use(middlewares.Auth)
