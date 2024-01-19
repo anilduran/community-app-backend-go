@@ -6,6 +6,7 @@ import (
 	"example.com/community-app-backend/db"
 	"example.com/community-app-backend/models"
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 )
 
 func GetCommunities(c *gin.Context) {
@@ -59,7 +60,7 @@ func CreateCommunity(c *gin.Context) {
 		return
 	}
 
-	userId := c.GetUint("userId")
+	userId, _ := uuid.Parse(c.GetString("userId"))
 
 	community := models.Community{Name: input.Name, CreatorID: userId}
 

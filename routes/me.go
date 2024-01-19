@@ -7,13 +7,14 @@ import (
 	"example.com/community-app-backend/models"
 	"example.com/community-app-backend/utils"
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 )
 
 func GetMyCredentials(c *gin.Context) {
 
 	var user models.User
 
-	userId := c.GetUint("userId")
+	userId, _ := uuid.Parse(c.GetString("userId"))
 
 	result := db.DB.First(&user, userId)
 
@@ -43,7 +44,7 @@ func UpdateMyCredentials(c *gin.Context) {
 		return
 	}
 
-	userId := c.GetUint("userId")
+	userId, _ := uuid.Parse(c.GetString("userId"))
 
 	var user models.User
 
@@ -79,7 +80,7 @@ func UpdateMyCredentials(c *gin.Context) {
 
 func GetMyPosts(c *gin.Context) {
 
-	userId := c.GetUint("userId")
+	userId, _ := uuid.Parse(c.GetString("userId"))
 
 	var posts []models.Post
 
@@ -96,7 +97,7 @@ func GetMyPosts(c *gin.Context) {
 
 func GetMyComments(c *gin.Context) {
 
-	userId := c.GetUint("userId")
+	userId, _ := uuid.Parse(c.GetString("userId"))
 
 	var comments []models.Comment
 
@@ -113,7 +114,7 @@ func GetMyComments(c *gin.Context) {
 
 func GetMyCommunities(c *gin.Context) {
 
-	userId := c.GetUint("userId")
+	userId, _ := uuid.Parse(c.GetString("userId"))
 
 	var communities []models.Community
 

@@ -6,6 +6,7 @@ import (
 	"example.com/community-app-backend/db"
 	"example.com/community-app-backend/models"
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 )
 
 func GetPosts(c *gin.Context) {
@@ -60,7 +61,7 @@ func CreatePost(c *gin.Context) {
 		return
 	}
 
-	userId := c.GetUint("userId")
+	userId, _ := uuid.Parse(c.GetString("userId"))
 
 	post := models.Post{
 		Title:       input.Title,

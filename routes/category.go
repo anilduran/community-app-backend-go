@@ -6,6 +6,7 @@ import (
 	"example.com/community-app-backend/db"
 	"example.com/community-app-backend/models"
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 )
 
 func GetCategories(c *gin.Context) {
@@ -27,7 +28,7 @@ func GetCategories(c *gin.Context) {
 
 func GetCategoryByID(c *gin.Context) {
 
-	id := c.Param("id")
+	id, _ := uuid.Parse(c.Param("id"))
 
 	var category models.Category
 
@@ -85,7 +86,7 @@ func UpdateCategory(c *gin.Context) {
 		return
 	}
 
-	id := c.Param("id")
+	id, _ := uuid.Parse(c.Param("id"))
 
 	var category models.Category
 
@@ -114,7 +115,7 @@ func UpdateCategory(c *gin.Context) {
 
 func DeleteCategory(c *gin.Context) {
 
-	id := c.Param("id")
+	id, _ := uuid.Parse(c.Param("id"))
 
 	var category models.Category
 
